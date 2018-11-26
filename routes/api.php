@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post("login", "API\UserController@login");
 Route::post("register", "API\UserController@register");
+
+Route::get("categories", "API\CategoryController@index");
+Route::apiResource("tasks", "API\TaskController");
