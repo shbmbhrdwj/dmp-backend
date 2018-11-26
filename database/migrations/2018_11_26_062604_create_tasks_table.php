@@ -19,8 +19,8 @@ class CreateTasksTable extends Migration
             $table->text("description");
             $table->unsignedInteger("budget_start");
             $table->unsignedInteger("budget_end");
-            $table->unsignedDecimal('user_rating', 1, 2)->default(0);
-            $table->unsignedDecimal('worker_rating', 1, 2)->default(0);
+            $table->float('user_rating')->default(0);
+            $table->float('worker_rating')->default(0);
             $table->double("latitude");
             $table->double("longitude");
             $table->text("address");
