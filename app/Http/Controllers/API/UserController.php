@@ -22,7 +22,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->rating = 0;
         $user->save();
-        return ["status" => 0];
+        return ["status" => 0, "data" => $user];
 
 
     }
@@ -34,8 +34,9 @@ class UserController extends Controller
         $users = User::where("email", $request->email)->get();
         if (count($users) == 0)
             return ["status" => -1, "message" => "Invalid User ID/Password"];
-        if (Hash::check($request->password, $users->first()->password))
-            return ["status" => 0, "message" => "succesfully logged in"];
+        $user = $users->first();
+        if (Hash::check($request->password, $user->password))
+            return ["status" => 0, "message" => "succesfully logged in", "data" => $user];
         else return ["status" => -1, "Invalid User ID/Password"];
     }
 
