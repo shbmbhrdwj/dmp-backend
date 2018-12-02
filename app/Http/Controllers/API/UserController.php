@@ -12,17 +12,23 @@ class UserController extends Controller
     //
 
 
-    //TODO Use auth token
     public function register(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->rating = 0;
-        $user->save();
-        return ["status" => 0, "data" => $user];
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        $token = $user->createToken('DMP')->accessToken;
+        $data = ['token' => $token, 'user' => $user];
+        return response()->json(['status' => 0, "message" => "Success", "data" => $data], 200);
 
 
     }
@@ -30,15 +36,28 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
-        $users = User::where("email", $request->email)->get();
-        if (count($users) == 0)
-            return ["status" => -1, "message" => "Invalid User ID/Password"];
-        $user = $users->first();
-        if (Hash::check($request->password, $user->password))
-            return ["status" => 0, "message" => "succesfully logged in", "data" => $user];
-        else return ["status" => -1, "Invalid User ID/Password"];
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            $token = $user->createToken('DMP')->accessToken;
+            $data = ['token' => $token, 'user' => $user];
+            return response()->json(['status' => 0, "message" => "Success", "data" => $data], 200);
+        } else {
+            return response()->json(['error' => 'UnAuthorised'], 401);
+        }
     }
 
-
+    /**
+     * Returns Authenticated User Details
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function details()
+    {
+        return response()->json(['user' => auth()->user()], 200);
+    }
 }

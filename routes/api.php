@@ -13,8 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', 'API\UserController@details');
+    Route::apiResource("tasks", "API\TaskController");
 });
 
 
@@ -22,4 +23,3 @@ Route::post("login", "API\UserController@login");
 Route::post("register", "API\UserController@register");
 
 Route::get("categories", "API\CategoryController@index");
-Route::apiResource("tasks", "API\TaskController");
