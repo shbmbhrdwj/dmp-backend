@@ -47,7 +47,7 @@ class UserController extends Controller
             $data = ['token' => $token, 'user' => $user];
             return response()->json(['status' => 0, "message" => "Success", "data" => $data], 200);
         } else {
-            return response()->json(['error' => 'UnAuthorised'], 401);
+            return response()->json(['status' => -1, "message" => "Invalid Email/Password"], 401);
         }
     }
 
