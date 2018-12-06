@@ -58,6 +58,7 @@ class UserController extends Controller
      */
     public function details()
     {
-        return response()->json(['user' => auth()->user()], 200);
+        $data = ['user' => auth()->user()];
+        return response()->json(['status' => 0, "message" => "Success", "data" => $data], 200);
     }
 }
