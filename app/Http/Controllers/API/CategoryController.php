@@ -17,7 +17,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = new Categories(Category::all());
-        return ['status' => 0, "message" => "Success", "data" => $categories];
+//        return ['status' => 0, "message" => "Success", "data" => $categories];
+        return $categories;
     }
 
     /**
