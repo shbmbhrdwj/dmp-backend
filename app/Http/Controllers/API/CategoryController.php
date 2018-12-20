@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $categories = new Categories(Category::all());
 //        return ['status' => 0, "message" => "Success", "data" => $categories];
-        return Categories::all();
+        return Category::all();
     }
 
     /**
