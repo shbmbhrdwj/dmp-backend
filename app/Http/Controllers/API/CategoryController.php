@@ -13,12 +13,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return array|\Illuminate\Http\Response
+     * @return CategoryCollection|array|\Illuminate\Http\Response
      */
     public function index()
     {
-        $categories = new CategoryCollection(Category::all());
-        return ['status' => 0, "message" => "Success", "data" => $categories];
+        return new CategoryCollection(Category::all());
     }
 
     /**
@@ -80,7 +79,7 @@ class CategoryController extends Controller
     public function providers(Category $category, Request $request)
     {
         $perPage = ((int)$request->per_page) ?? 10;
-        $providers = $category->providers()->paginate($perPage)->appends(request()->except(['page','_token']));
+        $providers = $category->providers()->paginate($perPage)->appends(request()->except(['page', '_token']));
         $collection = new ProviderCollection($providers);
         return $collection;
     }
