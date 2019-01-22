@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function providers()
+    {
+        return $this->belongsToMany(Provider::class);
+    }
 }

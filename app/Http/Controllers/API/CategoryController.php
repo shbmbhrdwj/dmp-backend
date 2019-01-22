@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Category;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Categories;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\ProviderCollection;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = new Categories(Category::all());
+        $categories = new CategoryCollection(Category::all());
         return ['status' => 0, "message" => "Success", "data" => $categories];
     }
 
@@ -75,4 +76,14 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function providers(Category $category, Request $request)
+    {
+        $perPage = ((int)$request->per_page) ?? 10;
+        $providers = $category->providers()->paginate($perPage)->appends(request()->except(['page','_token']));
+        $collection = new ProviderCollection($providers);
+        return $collection;
+    }
+
+
 }

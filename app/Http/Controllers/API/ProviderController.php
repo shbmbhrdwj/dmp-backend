@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Worker;
+use App\Provider;
 use Illuminate\Http\Request;
 
-class WorkerController extends Controller
+class ProviderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +30,7 @@ class WorkerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,10 +41,10 @@ class WorkerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Worker $worker
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function show(Worker $worker)
+    public function show(Provider $provider)
     {
         //
     }
@@ -53,10 +52,10 @@ class WorkerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Worker $worker
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function edit(Worker $worker)
+    public function edit(Provider $provider)
     {
         //
     }
@@ -64,11 +63,11 @@ class WorkerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Worker $worker
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Worker $worker)
+    public function update(Request $request, Provider $provider)
     {
         //
     }
@@ -76,10 +75,10 @@ class WorkerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Worker $worker
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Worker $worker)
+    public function destroy(Provider $provider)
     {
         //
     }
