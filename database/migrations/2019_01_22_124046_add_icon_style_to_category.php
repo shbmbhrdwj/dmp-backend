@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIconToCategories extends Migration
+class AddIconStyleToCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddIconToCategories extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string("icon");
+            $table->string("icon_style");
         });
     }
 
@@ -26,7 +26,7 @@ class AddIconToCategories extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn("icon");
+            $table->dropColumn("icon_style");
         });
     }
 }

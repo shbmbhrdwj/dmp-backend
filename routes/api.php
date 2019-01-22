@@ -18,5 +18,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get("categories", "API\CategoryController@index");
 });
 
+
 Route::post("login", "API\UserController@login");
 Route::post("register", "API\UserController@register");
